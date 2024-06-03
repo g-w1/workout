@@ -4,6 +4,7 @@ import pygame
 import csv
 import time
 import sys
+from datetime import datetime
 
 
 class WorkoutTimer:
@@ -63,11 +64,16 @@ def read_instructions_from_csv(file_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python workout.py <instructions.csv>")
-        sys.exit(1)
-
-    csv_file_path = sys.argv[1]
+    if len(sys.argv) == 2:
+        csv_file_path = sys.argv[1]
+    else:
+        day_of_year = datetime.now().timetuple().tm_yday
+        if day_of_year % 2 == 0:
+            print("day of year is even, defaulting to upper body")
+            csv_file_path = "upperbody.csv"
+        else:
+            print("day of year is odd, defaulting to lower body")
+            csv_file_path = "lowerbody.csv"
     instructions = read_instructions_from_csv(csv_file_path)
 
     root = tk.Tk()
