@@ -33,11 +33,11 @@ class WorkoutTimer:
         self.next_instruction()
 
     def next_instruction(self):
+        pygame.mixer.music.load("bing.wav")
+        pygame.mixer.music.play()
         if self.current_instruction < len(self.instructions):
             instruction, duration = self.instructions[self.current_instruction]
             self.label.config(text=instruction)
-            pygame.mixer.music.load("bing.wav")
-            pygame.mixer.music.play()
             self.countdown(int(duration))
             self.current_instruction += 1
         else:
